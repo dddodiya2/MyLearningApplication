@@ -1,4 +1,4 @@
-package com.learning;
+package com.annotations.learning;
 
 public interface Learning {
 

@@ -1,4 +1,4 @@
-package com.learning;
+package com.xml.learning;
 
 public class JavaLearning implements Learning {
 

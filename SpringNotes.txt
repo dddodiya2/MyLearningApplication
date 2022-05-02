@@ -1,0 +1,123 @@
+Spring:-
+
+
+IoC (Inversion of Control)  or DI (Dependency Injection)
+Dependency injection is a pattern through which IoC is implemented and the act of connecting objects with 
+other objects or injecting objects into objects is done by container rather than by the object themselves.
+
+Spring Container :-
+The org.springframework.context.ApplicationContext interface represents the Spring IoC container 
+and is responsible for instantiating, configuring, and assembling the beans. 
+The container gets its instructions on what objects to instantiate, configure, and assemble by reading 
+configuration metadata. The configuration metadata is represented in XML, Java annotations, or Java code. 
+It lets you express the objects that compose your application and the rich interdependencies between those objects.
+
+
+********************************************************************************************************
+****************************************XML Based Configurations****************************************
+********************************************************************************************************
+
+Use of ClassPathXmlApplicationContext to get the configuration xml data.
+Configurations for beans is defined in the xml which generally is placed at class path.
+
+ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationConfig.xml");
+
+Listing down some of the tags and attributes that we use while working with xml configuration :-
+* <beans>  root element of the xml file , attributes like : default-destroy-method, etc can be used to set values for container level.(applicable to all beans).
+
+* <bean> this is the element which will create a bean in an container.
+	Attributes like :- id - name by which bean will be identified in the container,
+					class - Fully qualified classname
+					scope - defines scope of the bean . values can be - singleton, prototype, web-based scopes (session, global, request). default is singleton.
+					init-method, destroy-method   --> life cycle methods . lazy-init -- true/false/default  (true will only do lazy init else eager initialisation.)
+					autowire - defines autowiring mechanism (byType, byName, constructor, no).
+
+* <constructor-arg> :- child element of bean and used to provide constructor dependency, uses parameterised constructor to inject dependencies.
+* <property>        :- child element of bean and used to provide setter dependency, use setter methods to inject dependencies.
+					name - attribute in property tag which will be used to form the name of setter method and will look for that setter method in the bean to inject dependencies.
+					
+* <context:property-placeholder>  :- to define the path for properties file., will be used when we want to pick values from properties file.
+
+
+
+eg.:- 
+	
+	<context:property-placeholder  location="application.properties" />
+	
+	<bean id="happyFortune"
+		class="com.learning.model.HappyFortuneService" scope="prototype"  
+		init-method="init" destroy-method="destroy">
+		<property name="dayOfWeek"
+			value="${application.LastDayOfWeek}" />
+	</bean>
+
+	<bean id="myCoach1" class="com.learning.model.BaseballCoach">
+		<property name="fortuneService" ref="happyFortune" />
+	</bean>
+
+	<bean id="myCoach2" class="com.learning.model.TrackCoach">
+		<constructor-arg name="fortuneService"
+			ref="happyFortune" />
+	</bean>		
+
+Bean life cycle 
+1. Bean instantiation   --> def constructor , Parameterised contr, setter Injection
+2. Bean initialization  --> init-method
+3. Bean dependency injection and management  --> setter Injection
+4. Bean destruction     --> destroy-method
+
+********************************************************************************************************
+
+component-scan  ?
+@Component ?
+@Autowired  --> first byName, byType
+@Value      --> To initialize properties --> primetive , String, int, char, double 
+
+Dependency --> Autowiring , Setter Injection, Constructor Injection
+
+
+
+
+********************************************************************************************************
+***********************************Annotations Based Configurations*************************************
+********************************************************************************************************
+
+To use annotations based configuration we can either use ClassPathXmlApplicationContext by mix of both xml and 
+annotations based configuration. To achieve this simple add component-scan tag in xml file as below and 
+initialize the container using ClassPathXmlApplicationContext only.
+
+eg.: 
+<context:component-scan base-package="com.learningSpring"></context:component-scan>
+
+
+TO USE ONLY ANNOTATIONS AND NO XML CONFIGURATION:- 
+
+define no xml and us the @Configuration annotation on one of the java class and use @ComponentScan (Optional) on the class.
+And create ApplicationContext using this class.
+
+Eg.:-
+
+@Configuration
+@ComponentScan ("com.learningSpring")
+Class SportsConfigClass(){
+}
+
+
+--->
+main(){
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SportsConfigClass.class);
+}
+
+And then we do no need any xml.
+
+IMP NOTE :- @ComponentScan is optional.
+
+Some Annotations and theie use :-
+@Component     --> To declare the class as a bean to be available to container.  
+				   @Component("beanName")  -- we can define bean id in such way else default bean id would be class name with first letter decapitilize.
+
+@Autowired      --> For wiring the beans or we can say for dependency injection.
+			this annotation marks a constructor, field, setter method or config method to be autowired by Spring's dependency injection facilities
+			Case1 :- For constructor injection. We can annotate a constructor with @Autowired to get dependencies auto injected. (This use is optional).
+			Case2 :- For Setter injection , we can annotate a setter method(any name) to have the dependency injected. (Same as method injection)
+			Case3 :- For field level injecton. We can directly annotate a field to have the dependency injected.

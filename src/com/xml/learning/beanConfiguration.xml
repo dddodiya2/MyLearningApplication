@@ -7,7 +7,7 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="javaLearning" class="com.learning.JavaLearning"
+	<bean id="javaLearning" class="com.xml.learning.JavaLearning"
 	init-method="initJavaBean" destroy-method="destroyJavaBean">
 		<property name="task" value="Learn Java collections"></property>
 		<property name="assignment"
@@ -15,7 +15,7 @@
 		<property name="lession" ref="lession"></property>
 	</bean>
 
-	<bean id="springLearning" class="com.learning.SpringLearning" init-method="initSpringBean"
+	<bean id="springLearning" class="com.xml.learning.SpringLearning" init-method="initSpringBean"
 	destroy-method="destroySpringBean">
 		<constructor-arg name="task" value="Learn Spring Core"></constructor-arg>
 		<constructor-arg index="1"
@@ -23,12 +23,12 @@
 		<constructor-arg index="2" ref="lession2"></constructor-arg>
 	</bean>
 
-	<bean id="lession" class="com.learning.Lession">
+	<bean id="lession" class="com.xml.learning.Lession">
 		<property name="lessionNumber" value="1"></property>
 		<property name="lessionName" value="Lession 1"></property>
 	</bean>
 
-	<bean id="lession2" class="com.learning.Lession">
+	<bean id="lession2" class="com.xml.learning.Lession">
 		<property name="lessionNumber" value="2"></property>
 		<property name="lessionName" value="Lession 2"></property>
 	</bean>
