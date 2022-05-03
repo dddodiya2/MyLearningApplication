@@ -1,13 +1,12 @@
 package com.annotations.learning;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MyApplication {
 
 	public static void main(String[] args) {
 
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				"com/annotations/learning/beanConfiguration.xml");
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MyApplicationConfig.class);
 
 		Learning learning1 = (Learning) context.getBean("javaLearning");
 
@@ -16,6 +15,10 @@ public class MyApplication {
 		Learning learning2 = (Learning) context.getBean("springLearning");
 
 		learning2.geTask();
+
+		Learning learning3 = (Learning) context.getBean("learningForClass1");
+
+		learning3.geTask();
 
 		context.close();
 

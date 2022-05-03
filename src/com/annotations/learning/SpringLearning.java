@@ -1,6 +1,10 @@
 package com.annotations.learning;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,17 +15,17 @@ public class SpringLearning implements Learning {
 	private String task;
 	@Value("Spring assignment")
 	private String assignment;
-	
-	private Lession lession;
+
+	private LessionInterface lession;
 
 	public SpringLearning() {
 		System.out.println("Spring def contructor called");
 		this.task = "Default Spring task - practice concepts";
 		this.assignment = "Default Spring assignment";
 	}
-	
+
 	@Autowired
-	public SpringLearning(Lession lession) {
+	public SpringLearning(@Qualifier("springLession") LessionInterface lession) {
 		System.out.println("Spring paramterised contructor called");
 		this.lession = lession;
 	}
@@ -42,22 +46,22 @@ public class SpringLearning implements Learning {
 		return assignment;
 	}
 
-	public Lession getLessionIshwari() {
+	public LessionInterface getLessionIshwari() {
 		return lession;
 	}
 
 	public void setLessionIshwari(Lession lessionIshwari) {
 		this.lession = lessionIshwari;
 	}
-	
-	
+
+	@PostConstruct
 	public void initSpringBean() {
 		System.out.println("initSpringBean method called");
 	}
-	
+
+	@PreDestroy
 	public void destroySpringBean() {
 		System.out.println("destroySpringBean method called");
 	}
-	
-	
+
 }

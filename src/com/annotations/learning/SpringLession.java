@@ -3,18 +3,18 @@ package com.annotations.learning;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component("lession1")
-public class Lession implements LessionInterface {
+@Component
+public class SpringLession implements LessionInterface {
 
 	@Value("1")
 	private int lessionNumber;
-	@Value("Lession 1")
+	@Value("Java Lession 1")
 	private String lessionName;
 
-	public Lession() {
+	public SpringLession() {
 	}
 
-	public Lession(int lessionNumber, String lessionName) {
+	public SpringLession(int lessionNumber, String lessionName) {
 		this.lessionNumber = lessionNumber;
 		this.lessionName = lessionName;
 	}

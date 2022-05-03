@@ -1,6 +1,7 @@
 package com.annotations.learning;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +12,10 @@ public class JavaLearning implements Learning {
 	private String task;
 	@Value("Write a program to demonstrate collection concepts")
 	private String assignment;
-	
+
 	@Autowired
-	private Lession lession;
+	@Qualifier("javaLession")
+	private LessionInterface lession;
 
 	public JavaLearning() {
 		System.out.println("JavaLearning  default constructor called");
@@ -51,7 +53,7 @@ public class JavaLearning implements Learning {
 		this.assignment = assignment;
 	}
 
-	public Lession getLession() {
+	public LessionInterface getLession() {
 		return lession;
 	}
 
@@ -59,15 +61,13 @@ public class JavaLearning implements Learning {
 		System.out.println("JavaLearning setLession method called");
 		this.lession = lession;
 	}
-	
-	
+
 	public void initJavaBean() {
 		System.out.println("initJavaBean method called");
 	}
-	
+
 	public void destroyJavaBean() {
 		System.out.println("destroyJavaBean method called");
 	}
-	
-	
+
 }
