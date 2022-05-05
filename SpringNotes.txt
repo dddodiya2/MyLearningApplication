@@ -148,4 +148,36 @@ note that "cricketCoach" is the beanName that we want to inject out of several a
 
 @PostConstruct :- This annotation is used to declare a method to be init-method. (which gets executed once bean is created and initialized).
 @PreDestroy    :- This annotation is used to declare a method to be destroy-method. (which gets executed just before the bean gets destroyed by container).
+
+@Scope :- Used to define the bean Scope. 
+		available values are same as the scope attribute of <bean> tag in xml type configuration.
+
+singleton - single instance of the bean will be available in the spring ioc container.
+			Everytime we get the bean container  will return the same bean.
+
+prototype - multiple instances of the beans are created.
+			Every time bean is needed a new bean is created by spring container.
 			
+singleton, prototype, web-based scopes (session, global, request). default is singleton.
+
+HW.
+Question :- What is Singleton class or bean and how will you create a Singleton class in Java.
+
+
+		
+		
+@PropertySource :- 
+Spring @PropertySource annotation is used to provide properties file to Spring Environment. 
+This annotation is used with @Configuration classes.
+
+@Configuration
+@PropertySource("classpath:db.properties")
+@PropertySource("classpath:root.properties")
+public class DBConfiguration {
+}
+
+
+Example of @Value tag to read the property from properties file.
+
+@Value("${APP_NAME_NOT_FOUND}")
+private String defaultAppName;		

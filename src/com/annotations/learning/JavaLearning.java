@@ -3,8 +3,10 @@ package com.annotations.learning;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+@Scope("prototype")
 @Component
 public class JavaLearning implements Learning {
 
@@ -12,6 +14,13 @@ public class JavaLearning implements Learning {
 	private String task;
 	@Value("Write a program to demonstrate collection concepts")
 	private String assignment;
+
+	@Value("${application.name}")
+	private String applicationName;
+
+	public void getApplicationName() {
+		System.out.println("Application name from properties file : " + applicationName);
+	}
 
 	@Autowired
 	@Qualifier("javaLession")
