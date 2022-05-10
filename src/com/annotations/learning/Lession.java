@@ -1,8 +1,10 @@
 package com.annotations.learning;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+@Primary
 @Component("lession1")
 public class Lession implements LessionInterface {
 

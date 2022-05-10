@@ -3,11 +3,13 @@ package com.annotations.learning;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Scope("prototype")
 @Component
+@DependsOn("javaLession")
 public class JavaLearning implements Learning {
 
 	@Value("Learn Java collections")
@@ -22,7 +24,7 @@ public class JavaLearning implements Learning {
 		System.out.println("Application name from properties file : " + applicationName);
 	}
 
-	@Autowired
+	@Autowired(required = true)
 	@Qualifier("javaLession")
 	private LessionInterface lession;
 

@@ -181,3 +181,56 @@ Example of @Value tag to read the property from properties file.
 
 @Value("${APP_NAME_NOT_FOUND}")
 private String defaultAppName;		
+
+----------------------------------------------------------------------------------------------
+required=true/false Annotation :-
+The @Required annotation in spring is a method-level annotation applied to the setter method 
+of a bean property and thus making the setter-injection mandatory. 
+This annotation indicates that the required bean property must be injected with a value 
+at the configuration time.
+
+
+@DependsOn annotation :-
+If some bean depends on other beans and we specifically tell Spring to intialize them before 
+intializing current bean then use this annotation.
+
+
+@Primary - 
+
+
+@Lazy:-
+We use @Lazy when we want to initialize our bean lazily. 
+By default, Spring creates all singleton beans eagerly at the startup/bootstrapping 
+of the application context.
+
+However, there are cases when we need to create a bean when we request it,
+not at application startup.
+
+
+
+------------------------------------------------------------------------------------------------------
+
+********************************************************************************************************
+*******************************************SPRING MVC***************************************************
+********************************************************************************************************
+
+											model				model					view
+Web browser -----------> Front Controller  ------> Controller --------> View Template -------> browser
+
+Front Controller :- 
+Out of this Front controller is part of spring framework and is already developed by Spring. 
+Internally it is actually DispatcherServlet.
+It delegates request to our controller.
+
+Controller :-
+	Code created by developer/you.
+	Handle the request , process (service or anything). i;e contains business logic.
+	Places final output data into model.
+	
+Model :-
+	Model contains data.
+	Data can be any Java object or collection.
+	
+View :-
+	Usually JSP/JSTL.
+	To display data.

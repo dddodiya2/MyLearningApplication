@@ -19,15 +19,15 @@ public class MyApplication {
 		learning11.getApplicationName();
 		
 		
-		/*
-		 * Learning learning2 = (Learning) context.getBean("springLearning");
-		 * 
-		 * learning2.geTask();
-		 * 
-		 * Learning learning3 = (Learning) context.getBean("learningForClass1");
-		 * 
-		 * learning3.geTask();
-		 */
+		
+		  Learning learning2 = (Learning) context.getBean("springLearning");
+		  
+		  learning2.geTask();
+		  
+		  Learning learning3 = (Learning) context.getBean("learningForClass1");
+		  
+		  learning3.geTask();
+		 
 
 		context.close();
 
